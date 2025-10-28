@@ -1,12 +1,15 @@
-﻿using System.Security;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinalProjectC_.Models
 {
-    public class Role
+    public class Role : AuditableEntity
     {
         public int Id { get; set; }
         public string RoleName { get; set; } = string.Empty;
 
         public ICollection<Permission>? Permissions { get; set; }
+        public ICollection<User>? Users { get; set; }
     }
 }

@@ -1,11 +1,15 @@
-﻿namespace FinalProjectC_.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace FinalProjectC_.Models
 {
-    public class Bank
+    public class Bank : AuditableEntity
     {
         public int Id { get; set; }
         public string BankName { get; set; } = string.Empty;
 
-        // Navigation
         public ICollection<Branch>? Branches { get; set; }
     }
+
 }

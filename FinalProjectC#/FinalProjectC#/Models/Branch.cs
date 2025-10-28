@@ -1,8 +1,10 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinalProjectC_.Models
 {
-    public class Branch
+    public class Branch : AuditableEntity
     {
         public int Id { get; set; }
         public string BranchName { get; set; } = string.Empty;
