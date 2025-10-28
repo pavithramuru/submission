@@ -1,0 +1,22 @@
+﻿### Assumptions for Simple User & Account Management System (UAMS)
+
+1. The system will use JWT authentication with RS256 keys stored securely.
+2. Access tokens will be short-lived (~15 minutes), and refresh tokens valid for ~7 days.
+3. Users can have multiple roles and permissions.
+4. Role-based access will determine system privileges.
+5. There are two main user categories — bank staff (admins, employees) and customers.
+6. Each user can hold accounts in multiple banks.
+7. Each bank can have multiple branches, and each branch belongs to one bank.
+8. Accounts can be of types — Savings, Current, or Term Deposit.
+9. Term Deposits are treated as specialized Savings accounts.
+10. Accounts may be operated by minors or by Power of Attorney (POA).
+11. Multi-currency support will be provided for NRI or foreign users.
+12. SQL Server will be used with EF Core migrations.
+13. Database name will be `TrainingDB`, and schema name will be `training`.
+14. All primary keys will use GUIDs as identifiers.
+15. Each entity will include audit fields — `CreatedBy`, `CreatedOn`, `ModifiedBy`, `ModifiedOn`.
+16. Users will have unique usernames and securely hashed passwords.
+17. Admins have complete control, while customers access only their own data.
+18. Role and Permission entities will manage access control.
+19. Decimal(18,2) will be used for all monetary values.
+20. All data will be validated before operations like deposit, withdrawal, or closure.
