@@ -25,10 +25,10 @@ namespace FinalProjectC_.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // ✅ Set default schema
+            // Set default schema
             modelBuilder.HasDefaultSchema("training");
 
-            // ✅ Configure relationships and inheritance
+            // Configure relationships and inheritance
             modelBuilder.Entity<Account>()
                 .HasDiscriminator<string>("AccountType")
                 .HasValue<SavingsAccount>("Savings")

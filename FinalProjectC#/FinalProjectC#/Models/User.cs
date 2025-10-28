@@ -21,7 +21,7 @@ namespace FinalProjectC_.Models
         [Range(0, 120, ErrorMessage = "Age must be between 0 and 120")]
         public int Age { get; set; }
 
-        // ✅ Computed Property - Eligibility Check
+        // Computed Property - Eligibility Check
         public bool IsEligible => Age >= 18;
 
         // Navigation Properties

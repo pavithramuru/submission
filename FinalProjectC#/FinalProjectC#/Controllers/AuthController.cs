@@ -22,7 +22,7 @@ namespace FinalProjectC_.Controllers
             _jwtService = jwtService;
         }
 
-        // 🧾 Register new user
+        // Register new user
         [HttpPost("register")]
         public async Task<IActionResult> Register(User user)
         {
@@ -36,7 +36,7 @@ namespace FinalProjectC_.Controllers
             return Ok("User registered successfully");
         }
 
-        // 🔐 Login endpoint
+        // Login endpoint
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
