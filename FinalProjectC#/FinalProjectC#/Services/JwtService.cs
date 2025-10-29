@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FinalProjectC_.Models;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using FinalProjectC_.Models;
 
-namespace FinalProjectC_.Auth
+namespace FinalProjectC_.Services
 {
-    public class JwtService
+    public interface IJwtService
+    {
+        string GenerateToken(User user);
+    }
+
+    public class JwtService : IJwtService
     {
         private readonly IConfiguration _config;
 
@@ -18,28 +20,32 @@ namespace FinalProjectC_.Auth
             _config = config;
         }
 
-        public string GenerateToken(User user, IEnumerable<string> roles)
+        public string GenerateToken(User user)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim("userId", user.Id.ToString())
+                new Claim("UserId", user.Id.ToString())
             };
 
-            foreach (var role in roles)
+            // Add role claims
+            if (user.Roles != null)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                foreach (var role in user.Roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
+                }
             }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(double.Parse(_config["Jwt:ExpiresInMinutes"] ?? "60")),
+                expires: DateTime.UtcNow.AddMinutes(15),
                 signingCredentials: creds
             );
 
