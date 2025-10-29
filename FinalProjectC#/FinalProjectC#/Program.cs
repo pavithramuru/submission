@@ -1,5 +1,5 @@
 using FinalProjectC_.Data;
-using FinalProjectC_.Services; // <-- Add this
+using FinalProjectC_.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -7,11 +7,12 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// DbContext
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -25,11 +26,10 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YOUR_SECRET_KEY_HERE"))
+        IssuerSigningKey = new SymmetricSecurityKey(key)
     };
 });
 
-// **Register JWT service**
 builder.Services.AddScoped<IJwtService, JwtService>();
 
 builder.Services.AddControllers();
@@ -41,6 +41,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
