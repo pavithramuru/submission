@@ -25,38 +25,51 @@ namespace FinalProjectC_.Data
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Username)
                 .IsUnique();
+
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
             modelBuilder.Entity<Account>()
                 .HasIndex(a => a.AccountNumber)
                 .IsUnique();
 
-            // Many-to-Many User-Roles
+            // Many-to-Many: User <-> Role
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Roles)
-                .WithMany(r => r.Users);
+                .WithMany(r => r.Users)
+                .UsingEntity(
+                    j => j.ToTable("RoleUser", "training") // maps to your DB table
+                );
 
-            // Many-to-Many Role-Permissions
+            // Many-to-Many: Role <-> Permission
             modelBuilder.Entity<Role>()
                 .HasMany(r => r.Permissions)
-                .WithMany(p => p.Roles);
+                .WithMany(p => p.Roles)
+                .UsingEntity(
+                    j => j.ToTable("PermissionRole", "training") // maps to your DB table
+                );
 
-            // Relationships
+            // Bank -> Branch
             modelBuilder.Entity<Bank>()
                 .HasMany(b => b.Branches)
                 .WithOne(br => br.Bank)
-                .HasForeignKey(br => br.BankId);
+                .HasForeignKey(br => br.BankId)
+                .OnDelete(DeleteBehavior.Cascade);
 
+            // Branch -> Account
             modelBuilder.Entity<Branch>()
                 .HasMany(br => br.Accounts)
                 .WithOne(a => a.Branch)
-                .HasForeignKey(a => a.BranchId);
+                .HasForeignKey(a => a.BranchId)
+                .OnDelete(DeleteBehavior.Cascade);
 
+            // User -> Account
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Accounts)
                 .WithOne(a => a.User)
-                .HasForeignKey(a => a.UserId);
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
