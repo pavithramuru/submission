@@ -1,0 +1,257 @@
+body {
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  header, section, div {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  
+  h1 {
+    font-size: 40px;
+    line-height: 54px;
+    font-weight: 600;
+  }
+  
+  h2 {
+    font-size: 32px;
+    line-height: 44px;
+    font-weight: 600;
+  }
+  
+  p {
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 300;
+  }
+  
+  /*  Video and  Audio section styling */
+  #media-section {
+    background-color: #f3e8ff;
+    padding: 60px 20px;
+    border-radius: 20px;
+    width: 80%;
+    margin: 40px auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  #media-section h2 {
+    color: purple;
+    font-family: 'Times New Roman', serif;
+    margin-bottom: 20px;
+  }
+  
+  #media-section video {
+    width: 80%;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(128, 0, 128, 0.3);
+  }
+  
+  #media-section audio {
+    margin-top: 20px;
+    width: 60%;
+  }
+  
+  a, button {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    margin: 0 auto;
+    background-color: rgb(128, 0, 128);
+    padding: 10px 20px;
+    border-radius: 25px;
+  }
+  
+  a:hover {
+    background-color: #340345;
+    cursor: pointer;
+  }
+  
+  header {
+    background-color: aliceblue;
+    background-image: url(https://unsplash.it/1900/700?image=823);
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  header h1 {
+    color: white;
+  }
+  
+  #about p {
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  .contact {
+    background-color: #f3e8ff;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 50%;
+    margin: 40px auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact h2 {
+    color: purple;
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', serif;
+  }
+  
+  .contact form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact input,
+  .contact textarea {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #b57aff;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Times New Roman', serif;
+  }
+  
+  .contact button {
+    background-color: purple;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .contact button:hover {
+    background-color: #340345;
+  }
+  
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: rgb(12, 11, 16);
+    box-shadow: 0 0 5px rgba(47, 30, 134, 0.5);
+  }
+  
+  #gallary {
+    background-color: #f3e8ff;
+    border-radius: 20px;
+    text-align: center;
+    padding: 40px 0;
+  }
+  
+  #gallary h2 {
+    color: purple;
+    margin-bottom: 30px;
+    font-family: 'Times New Roman', serif;
+  }
+  
+  #gallary table {
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 20px;
+    border: none;
+  }
+  
+  #gallary img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid rgb(18, 23, 54);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  #gallary img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(128, 0, 128, 0.4);
+  }
+  
+  #newsletter {
+    background-color: #f3e8ff;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 50%;
+    margin: 40px auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Center table contents */
+  #newsletter table {
+    margin: 0 auto;              /* centers the table horizontally */
+    text-align: center;          /* centers the text inside cells */
+  }
+  
+  #newsletter td {
+    text-align: center;          /* ensures td content is centered */
+    vertical-align: middle;
+  }
+  
+  #newsletter h2 {
+    color: purple;
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', serif;
+  }
+  
+  #newsletter form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;          /* centers input and button */
+    justify-content: center;
+  }
+  
+  #newsletter input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #b57aff;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Times New Roman', serif;
+    text-align: center;
+  }
+  
+  /* Darker border and glow on click/focus */
+  #newsletter input:focus {
+    outline: none;
+    border-color: rgb(12, 11, 16);
+    box-shadow: 0 0 5px rgba(47, 30, 134, 0.5);
+  }
+  
+  #newsletter button {
+    background-color: purple;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #newsletter button:hover {
+    background-color: #340345;
+  }
+  
+  
+  footer {
+    background-color: #181111;
+    color: white;
+    padding: 20px 0;
+  }
+  
+  footer p {
+    margin: 0;
+    font-size: 14px;
+  }
+  

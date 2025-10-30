@@ -1,5 +1,6 @@
 ﻿using FinalProjectC_.Data;
 using FinalProjectC_.Models;
+using FinalProjectC_.Models.DTOs;
 using FinalProjectC_.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,39 +15,62 @@ namespace FinalProjectC_.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IJwtService _jwtService;
+        private readonly ILogger<LoginController> _logger;
 
-        public LoginController(AppDbContext context, IJwtService jwtService)
+        public LoginController(AppDbContext context, IJwtService jwtService, ILogger<LoginController> logger)
         {
             _context = context;
             _jwtService = jwtService;
+            _logger = logger;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
-            // Find user by username or email
-            var user = await _context.Users
-                .Include(u => u.Roles)
-                .FirstOrDefaultAsync(u => u.Username == request.UsernameOrEmail || u.Email == request.UsernameOrEmail);
-
-            if (user == null) return Unauthorized("Invalid credentials");
-
-            // Verify password
-            using (var sha1 = SHA1.Create())
+            if (request == null || string.IsNullOrWhiteSpace(request.UsernameOrEmail) || string.IsNullOrWhiteSpace(request.Password))
             {
-                var hash = Convert.ToBase64String(sha1.ComputeHash(Encoding.UTF8.GetBytes(request.Password)));
+                return BadRequest("Username/Email and Password are required.");
             }
 
+            try
+            {
+                var user = await _context.Users
+                    .Include(u => u.Roles)
+                    .FirstOrDefaultAsync(u => u.Username == request.UsernameOrEmail || u.Email == request.UsernameOrEmail);
 
-            // Generate token
-            var token = _jwtService.GenerateToken(user);
-            return Ok(new { Token = token });
+                if (user == null)
+                {
+                    return Unauthorized("Invalid credentials.");
+                }
+
+                string passwordHash;
+                using (var sha1 = SHA1.Create())
+                {
+                    passwordHash = Convert.ToBase64String(
+                        sha1.ComputeHash(Encoding.UTF8.GetBytes(request.Password))
+                    );
+                }
+
+                if (user.PasswordHash != passwordHash)
+                {
+                    return Unauthorized("Invalid credentials.");
+                }
+
+                var token = _jwtService.GenerateToken(user);
+
+                var response = new LoginResponseDto
+                {
+                    Token = token,
+                    Username = user.Username,
+                    Email = user.Email
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
         }
-    }
-
-    public class LoginRequest
-    {
-        public string UsernameOrEmail { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
     }
 }
