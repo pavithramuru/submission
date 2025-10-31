@@ -4,7 +4,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-header, section, div {
+header {
   padding-top: 100px;
   padding-bottom: 100px;
 }
@@ -83,6 +83,20 @@ header {
 header h1 {
   color: white;
 }
+#about {
+  background-color: #f3e8ff;
+  border-radius: 20px;
+  padding: 60px 20px;
+  width: 80%;
+  margin: 40px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+#about h2 {
+  color: purple;
+  margin-bottom: 20px;
+  font-family: 'Times New Roman', serif;
+}
+
 
 #about p {
   width: 60%;
@@ -112,7 +126,7 @@ letter-spacing: 2px;
 }
 /* Skill box (common style) */
 #skills .skill-category {
-background-color: #fbe6ff; 
+background-color: #f3e8ff; 
 color: #222;
 padding: 25px 20px;
 border-radius: 15px;
@@ -319,11 +333,53 @@ textarea:focus {
 footer {
   background-color: #181111;
   color: white;
-  padding: 20px 0;
+  padding: 15px 0; /* Reduced height */
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
-footer p {
-  margin: 0;
-  font-size: 14px;
+/* Container */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+/* GitHub button (same style as other buttons) */
+.github-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: rgb(128, 0, 128); /* purple */
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* GitHub logo */
+.github-button img {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover effect */
+.github-button:hover {
+  background-color: #340345; /* button turns darker purple */
+  transform: translateY(-2px);
+}
+
+/* GitHub logo turns green on hover */
+.github-button:hover img {
+  filter: invert(57%) sepia(90%) saturate(527%) hue-rotate(80deg) brightness(110%) contrast(95%);
+  transform: scale(1.1);
+}
+
+
 
