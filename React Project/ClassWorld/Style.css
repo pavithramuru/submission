@@ -112,7 +112,7 @@ letter-spacing: 2px;
 }
 /* Skill box (common style) */
 #skills .skill-category {
-background-color: #fbe6ff; /* 💜 same bg for both */
+background-color: #fbe6ff; 
 color: #222;
 padding: 25px 20px;
 border-radius: 15px;
@@ -127,7 +127,7 @@ color: purple;
 }
 /* Star symbol */
 #skills .skill-category > h3 > .required {
-color: #e60073; /* 💖 pink star */
+color: #e60073; 
 font-weight: bold;
 margin-right: 6px;
 }
