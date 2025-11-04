@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Example</title>
+  <style>
+    #message {
+      font-size: 20px;
+      color: darkblue;
+      margin: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: dodgerblue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: rgb(7, 21, 60);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>JavaScript DOM Example</h2>
+
+  <p id="message">This is the original text.</p>
+  <button onclick="changeText()">Click Me!</button>
+
+  <script>
+    function changeText() {
+      // Access the DOM element by its ID
+      const msg = document.getElementById("message");
+
+      // Change its text content
+      msg.textContent = "The text has been changed using the DOM!";
+
+      // Change the style dynamically
+      msg.style.color = "green";
+      msg.style.fontWeight = "bold";
+      msg.style.fontSize = "24px";
+    }
+  </script>
+
+</body>
+</html>
