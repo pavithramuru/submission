@@ -1,0 +1,16 @@
+.content-box {
+    background-color: pink;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .content-box h1 {
+    color: #ff1493;
+  }
+  
+  .content-box p {
+    color: #333;
+  }
+  

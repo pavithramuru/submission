@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Box Example</title>
+  <style>
+    body {
+      background-color: pink;           /* Page background color */
+      display: flex;                    /* Use flexbox for centering */
+      justify-content: center;          /* Center horizontally */
+      align-items: center;              /* Center vertically */
+      height: 100vh;                    /* Full viewport height */
+      margin: 0;                        /* Remove default margins */
+      font-family: Arial, sans-serif;
+    }
+
+    .content-box {
+      background-color: white;          /* Different background for content */
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff1493;
+    }
+
+    p {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="content-box">
+    <h1>Hello, Welcome!</h1>
+    <p>This content is centered on a pink background with a white box.</p>
+  </div>
+</body>
+</html>
