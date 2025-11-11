@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateField, submitForm, clearForm } from "../store";
+import { updateField, submitForm, clearForm } from "../store/formSlice";
 
-const Form = () => {
+const FormComponent = () => {
   const dispatch = useDispatch();
   const { username, email, password, color } = useSelector(
     (state) => state.form
@@ -23,44 +23,45 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-
+      <label>Username:</label>
       <input
         type="text"
         name="username"
-        placeholder="Username"
+        placeholder="Enter username"
         value={username}
         onChange={handleChange}
       />
 
+      <label>Email:</label>
       <input
         type="email"
         name="email"
-        placeholder="Email"
+        placeholder="Enter email"
         value={email}
         onChange={handleChange}
       />
 
+      <label>Password:</label>
       <input
         type="password"
         name="password"
-        placeholder="Password"
+        placeholder="Enter password"
         value={password}
         onChange={handleChange}
       />
 
-<div className="color-picker">
-  <label>Pick a Color:</label>
-  <input
-    type="color"
-    name="color"
-    value={color}
-    onChange={handleChange}
-    className="color-input"
-  />
-</div>
+      <div className="color-picker">
+        <label>Pick a Color:</label>
+        <input
+          type="color"
+          name="color"
+          value={color}
+          onChange={handleChange}
+          className="color-input"
+        />
+      </div>
 
-
-      <div>
+      <div className="btn-group">
         <button type="submit">Submit</button>
         <button type="button" onClick={handleClear}>
           Clear
@@ -70,4 +71,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormComponent;

@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const formSlice = createSlice({
   name: "form",
@@ -6,7 +6,7 @@ const formSlice = createSlice({
     username: "",
     email: "",
     password: "",
-    color: "#000000", // Default color (black)
+    color: "#000000",
     submittedData: null,
   },
   reducers: {
@@ -32,11 +32,4 @@ const formSlice = createSlice({
 });
 
 export const { updateField, submitForm, clearForm } = formSlice.actions;
-
-const store = configureStore({
-  reducer: {
-    form: formSlice.reducer,
-  },
-});
-
-export default store;
+export default formSlice.reducer;

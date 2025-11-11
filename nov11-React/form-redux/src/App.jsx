@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Form from "./component/Form";
+import FormComponent from "./component/FormComponent";
 import DisplayData from "./component/DisplayData";
 import Clock from "./component/Clock";
 import ColorSelector from "./component/ColorSelector";
@@ -16,7 +16,7 @@ const App = () => {
       <div className="forms-row">
         <div className="form-box">
           <h2>Register Form</h2>
-          <Form />
+          <FormComponent />
         </div>
 
         <div className="form-box">
