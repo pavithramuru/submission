@@ -20,7 +20,6 @@ const App = () => {
         </div>
 
         <div className="form-box">
-          <h2>Registered Data</h2>
           <DisplayData />
         </div>
       </div>

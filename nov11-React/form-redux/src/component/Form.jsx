@@ -23,7 +23,6 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Register Form</h2>
 
       <input
         type="text"
