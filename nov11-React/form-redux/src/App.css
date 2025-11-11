@@ -1,0 +1,128 @@
+/* ===== App Layout ===== */
+.app-container {
+  text-align: center;
+  font-family: "Poppins", Arial, sans-serif;
+  padding: 40px 20px;
+  background: linear-gradient(to right, #f3f6fb, #eaf1f7);
+  min-height: 100vh;
+}
+
+.main-title {
+  color: #2a2a2a;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===== Form and Data Section ===== */
+.forms-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.form-box {
+  background: #ffffff;
+  padding: 30px 35px;
+  border-radius: 14px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  width: 340px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+  text-align: center;
+  color: #007bff;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+/* ===== Input & Button Styling ===== */
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 12px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* ===== Clock Section ===== */
+.clock-section {
+  margin: 50px auto;
+  text-align: center;
+  width: 400px;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.time-display {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 12px 25px;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 15px 0;
+  background: #f9f9f9;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Color Picker ===== */
+.color-picker {
+  margin: 15px 0;
+}
+
+.color-input {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.selected-color {
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+}
