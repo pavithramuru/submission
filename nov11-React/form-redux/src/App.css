@@ -126,3 +126,9 @@ button:hover {
   color: #333;
   font-size: 14px;
 }
+.success-message {
+  text-align: center;
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}

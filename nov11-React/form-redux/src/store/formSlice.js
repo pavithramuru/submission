@@ -1,17 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  username: "",
+  email: "",
+  password: "",
+  color: "#000000",
+  submittedData: null,
+};
+
 const formSlice = createSlice({
   name: "form",
-  initialState: {
-    username: "",
-    email: "",
-    password: "",
-    color: "#000000",
-    submittedData: null,
-  },
+  initialState,
   reducers: {
     updateField: (state, action) => {
-      state[action.payload.field] = action.payload.value;
+      const { field, value } = action.payload;
+      state[field] = value;
     },
     submitForm: (state) => {
       state.submittedData = {
