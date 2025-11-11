@@ -9,6 +9,9 @@ const DisplayData = () => {
   return (
     <div>
       <h2>Live Data (Before Submit)</h2>
+      {/* <div className="json-box">
+        {JSON.stringify({ username, email, password, color }, null, 2)}
+      </div> */}
       <p>
         <strong>Username:</strong> {username}
       </p>
@@ -33,6 +36,7 @@ const DisplayData = () => {
       <hr />
 
       <h2>Submitted Data</h2>
+      
       {submittedData ? (
         <div>
           <p>

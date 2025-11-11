@@ -31,6 +31,7 @@ const FormComponent = () => {
           placeholder="Enter username"
           value={username}
           onChange={handleChange}
+          required
         />
 
         <label>Email:</label>
@@ -40,6 +41,7 @@ const FormComponent = () => {
           placeholder="Enter email"
           value={email}
           onChange={handleChange}
+          required
         />
 
         <label>Password:</label>
@@ -49,6 +51,7 @@ const FormComponent = () => {
           placeholder="Enter password"
           value={password}
           onChange={handleChange}
+          required
         />
 
         <div className="color-picker">
