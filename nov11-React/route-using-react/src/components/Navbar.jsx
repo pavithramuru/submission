@@ -1,30 +1,60 @@
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  
+  const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("username");
+
+    if (token && storedUser) {
+      setIsLoggedIn(true);
+      setUsername(storedUser);
+    } else {
+      setIsLoggedIn(false);
+      setUsername("");
+    }
+  }, [location]);
 
   const handleAuthClick = () => {
     if (isLoggedIn) {
+      // Logout
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
       setIsLoggedIn(false);
-      navigate("/"); // Redirect to home
+      setUsername("");
+      navigate("/login");
     } else {
-      navigate("/login"); // Go to login page
+      navigate("/login");
     }
   };
+
+  // ✅ Hide Navbar completely on login/register pages
+  if (location.pathname === "/login" || location.pathname === "/register") {
+    return null;
+  }
 
   return (
     <nav className="navbar">
       <div className="left-nav">
-        <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>Home</NavLink>
-        <NavLink to="/about" className={({ isActive }) => isActive ? "active-link" : ""}>About</NavLink>
-        <NavLink to="/contact" className={({ isActive }) => isActive ? "active-link" : ""}>Contact</NavLink>
-        <NavLink to="/fetch" className={({ isActive }) => isActive ? "active-link" : ""}>Fetch Data</NavLink>
+        <NavLink to="/home" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          Home
+        </NavLink>
+        <NavLink to="/about" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          About
+        </NavLink>
+        <NavLink to="/contact" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          Contact
+        </NavLink>
       </div>
+
       <div className="right-nav">
+        {isLoggedIn && <span className="user-info">Welcome {username} 👋</span>}
         <button className="auth-btn" onClick={handleAuthClick}>
           {isLoggedIn ? "Logout" : "Login"}
         </button>
