@@ -1,4 +1,5 @@
 ﻿using FinalProjectC_.Data;
+using FinalProjectC_.Models;
 using FinalProjectC_.Models.DTOs;
 using FinalProjectC_.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -36,22 +37,68 @@ namespace FinalProjectC_.Controllers
             if (user == null)
                 return Unauthorized("Invalid username/email or password.");
 
-            // ✅ Use SHA256 hashing to match SeedData
             var hashedPassword = HashPasswordSHA256(request.Password);
-
-            Console.WriteLine($"Entered Hash: {hashedPassword}");
-            Console.WriteLine($"Stored Hash:  {user.PasswordHash}");
 
             if (hashedPassword != user.PasswordHash)
                 return Unauthorized("Invalid credentials.");
 
             var token = _jwtService.GenerateToken(user);
 
-            return Ok(new LoginResponseDto
+            // ✅ Return login name and roles
+            return Ok(new
             {
                 Token = token,
                 Username = user.Username,
-                Email = user.Email
+                Email = user.Email,
+                Roles = user.Roles.Select(r => r.RoleName).ToList()
+            });
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Username) ||
+                string.IsNullOrWhiteSpace(request.Email) ||
+                string.IsNullOrWhiteSpace(request.Password) ||
+                string.IsNullOrWhiteSpace(request.Role))
+                return BadRequest("Username, email, password, and role are required.");
+
+            // Check for duplicate users
+            if (await _context.Users.AnyAsync(u => u.Username == request.Username || u.Email == request.Email))
+                return BadRequest("Username or email already exists.");
+
+            // Hash password using SHA256
+            var passwordHash = HashPasswordSHA256(request.Password);
+
+            // Ensure role exists or create new
+            var userRole = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == request.Role);
+            if (userRole == null)
+            {
+                userRole = new Role { RoleName = request.Role };
+                _context.Roles.Add(userRole);
+                await _context.SaveChangesAsync();
+            }
+
+            // Create user
+            var newUser = new User
+            {
+                Username = request.Username,
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                Roles = new List<Role> { userRole },
+                CreatedBy = "System",
+                CreatedOn = DateTime.UtcNow
+            };
+
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                message = "User registered successfully!",
+                newUser.Username,
+                newUser.Email,
+                Role = request.Role
             });
         }
 
