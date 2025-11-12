@@ -34,7 +34,7 @@ const Navbar = () => {
     }
   };
 
-  // ✅ Hide Navbar completely on login/register pages
+  //  Hide Navbar completely on login/register pages
   if (location.pathname === "/login" || location.pathname === "/register") {
     return null;
   }
