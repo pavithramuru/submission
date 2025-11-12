@@ -36,7 +36,8 @@ namespace FinalProjectC_.Controllers
             if (user == null)
                 return Unauthorized("Invalid username/email or password.");
 
-            var hashedPassword = HashPasswordMD5(request.Password);
+            // ✅ Use SHA256 hashing to match SeedData
+            var hashedPassword = HashPasswordSHA256(request.Password);
 
             Console.WriteLine($"Entered Hash: {hashedPassword}");
             Console.WriteLine($"Stored Hash:  {user.PasswordHash}");
@@ -54,11 +55,11 @@ namespace FinalProjectC_.Controllers
             });
         }
 
-        private static string HashPasswordMD5(string password)
+        private static string HashPasswordSHA256(string password)
         {
-            using var md5 = MD5.Create();
+            using var sha = SHA256.Create();
             var bytes = Encoding.UTF8.GetBytes(password);
-            var hash = md5.ComputeHash(bytes);
+            var hash = sha.ComputeHash(bytes);
             return Convert.ToBase64String(hash);
         }
     }

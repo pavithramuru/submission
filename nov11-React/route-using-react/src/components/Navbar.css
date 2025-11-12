@@ -4,24 +4,48 @@
     align-items: center;
     padding: 15px 50px;
     background-color: #007bff;
-    color: white;
-    position: sticky;
-    top: 0;
   }
   
-  .nav-links a {
+  .left-nav, .right-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .left-nav a {
+    margin-right: 20px;
     color: white;
-    margin-left: 20px;
     text-decoration: none;
     font-weight: bold;
   }
   
-  .nav-links a:hover {
-    text-decoration: underline;
-  }
-  
-  .logo {
-    font-size: 24px;
+  .right-nav a {
+    color: white;
+    text-decoration: none;
     font-weight: bold;
   }
+  
+  /* .left-nav a:hover,
+  .right-nav a:hover {
+    text-decoration: underline;
+  } */
+  
+  .active-link {
+    border-bottom: 2px solid yellow;
+    padding-bottom: 2px;
+  }
+  .auth-btn {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .auth-btn:hover {
+    background-color: white;
+    color: #007bff;
+  }
+  
   

@@ -3,6 +3,7 @@ import "./PageStyles.css";
 
 const About = () => (
   <div className="page">
+
     <h1>About Us</h1>
     <p>We are a team of passionate developers creating user-friendly web applications.</p>
     <h2>Our Mission</h2>
