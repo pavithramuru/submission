@@ -1,11 +1,13 @@
+// src/pages/Login.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import PopupMessage from "../components/PopupMessage";
 import "./Auth.css";
 
 const Login = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [popup, setPopup] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,13 +26,13 @@ const Login = () => {
         localStorage.setItem("username", data.username);
         localStorage.setItem("role", data.role);
 
-        setMessage("Login successful! Redirecting...");
+        setPopup({ message: "Login successful! Redirecting...", type: "success" });
         setTimeout(() => navigate("/home"), 1500);
       } else {
-        setMessage("Invalid credentials. Please try again.");
+        setPopup({ message: "Invalid credentials. Please try again.", type: "error" });
       }
     } catch {
-      setMessage("Server connection error.");
+      setPopup({ message: "Server connection error.", type: "error" });
     }
   };
 
@@ -57,14 +59,19 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
 
-      {message && <p className="message">{message}</p>}
-
       <p className="switch-text">
         Don't have an account? <Link to="/register">Register here</Link>
       </p>
+
+      {popup && (
+        <PopupMessage
+          message={popup.message}
+          type={popup.type}
+          onClose={() => setPopup(null)}
+        />
+      )}
     </div>
   );
 };
 
 export default Login;
-    

@@ -1,36 +1,46 @@
 import React, { useState } from "react";
+import PopupMessage from "../components/PopupMessage";
 import "./PageStyles.css";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [popup, setPopup] = useState(null);
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
+    setPopup({ message: "Message sent successfully!", type: "success" });
+    setForm({ name: "", email: "", message: "" });
   };
 
   return (
     <div className="page">
       <h1>Contact Us</h1>
-      <p>Fill the form below to get in touch with us.</p>
-      {submitted && <p className="success-msg">Thank you! Your message has been sent.</p>}
+      <p>Have a question or feedback? We'd love to hear from you!</p>
 
       <form onSubmit={handleSubmit} className="contact-form">
         <label>Name</label>
-        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+        <input name="name" value={form.name} onChange={handleChange} required />
 
         <label>Email</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+        <input type="email" name="email" value={form.email} onChange={handleChange} required />
 
         <label>Message</label>
-        <textarea name="message" value={formData.message} onChange={handleChange} rows="5" required></textarea>
+        <textarea name="message" value={form.message} onChange={handleChange} required />
 
-        <button type="submit">Send</button>
+        <button type="submit">Send Message</button>
       </form>
+
+      {popup && (
+        <PopupMessage
+          message={popup.message}
+          type={popup.type}
+          onClose={() => setPopup(null)}
+        />
+      )}
     </div>
   );
 };

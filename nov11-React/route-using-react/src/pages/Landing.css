@@ -1,0 +1,80 @@
+/* Full-screen super landing page */
+.landing-page {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Centered content */
+  .landing-content {
+    position: relative;
+    z-index: 10;
+    max-width: 700px;
+  }
+  
+  .landing-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: white;
+  }
+  
+  .landing-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+  
+  /* Buttons */
+  .landing-buttons button {
+    margin: 0 15px;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fff;
+    color: #007bff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .landing-buttons button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Floating animated shapes */
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    background: #fff;
+    animation: float 20s infinite linear;
+  }
+  
+  .shape1 { width: 400px; height: 400px; top: -150px; left: -100px; }
+  .shape2 { width: 300px; height: 300px; bottom: -120px; right: -80px; animation-delay: 5s; }
+  .shape3 { width: 250px; height: 250px; top: 200px; right: -100px; animation-delay: 10s; }
+  .shape4 { width: 200px; height: 200px; bottom: 150px; left: -80px; animation-delay: 15s; }
+  
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-40px) translateX(50px) rotate(45deg); }
+    100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .landing-content h1 { font-size: 2.5rem; }
+    .landing-buttons button { padding: 12px 30px; font-size: 1rem; margin: 10px; }
+  }
+  

@@ -1,13 +1,14 @@
+// src/pages/Register.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import PopupMessage from "../components/PopupMessage";
 import "./Auth.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("User");
-  const [message, setMessage] = useState("");
+  const [popup, setPopup] = useState(null);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -17,18 +18,17 @@ const Register = () => {
       const response = await fetch("https://localhost:7082/api/Auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password, role }),
+        body: JSON.stringify({ username, email, password }),
       });
 
       if (response.ok) {
-        setMessage("Registration successful! Redirecting to login...");
+        setPopup({ message: "Registration successful! Please login.", type: "success" });
         setTimeout(() => navigate("/login"), 1500);
       } else {
-        const errorText = await response.text();
-        setMessage(errorText);
+        setPopup({ message: "Registration failed. Try again.", type: "error" });
       }
     } catch {
-      setMessage("Server connection error.");
+      setPopup({ message: "Server connection error.", type: "error" });
     }
   };
 
@@ -37,20 +37,10 @@ const Register = () => {
       <h2>Register</h2>
       <form onSubmit={handleRegister} className="auth-form">
         <label>Username</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+        <input value={username} onChange={(e) => setUsername(e.target.value)} required />
 
         <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
         <label>Password</label>
         <input
@@ -60,22 +50,20 @@ const Register = () => {
           required
         />
 
-        <label>Role</label>
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="User">User</option>
-          <option value="Admin">Admin</option>
-          <option value="Tester">Tester</option>
-          <option value="Customer">Customer</option>
-        </select>
-
         <button type="submit">Register</button>
       </form>
 
-      {message && <p className="message">{message}</p>}
-
       <p className="switch-text">
-        Already have an account? <Link to="/login">Login here</Link>
+        Already have an account? <Link to="/login">Login</Link>
       </p>
+
+      {popup && (
+        <PopupMessage
+          message={popup.message}
+          type={popup.type}
+          onClose={() => setPopup(null)}
+        />
+      )}
     </div>
   );
 };

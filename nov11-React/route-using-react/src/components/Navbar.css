@@ -1,48 +1,124 @@
 .navbar {
-    background-color: #222;
-    color: white;
+    background: linear-gradient(90deg, #141e30, #243b55); /* dark blue gradient */
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
+    padding: 18px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+  }
+  
+  .navbar:hover {
+    background: linear-gradient(90deg, #16222a, #3a6073);
+  }
+  
+  /* Left Nav Links */
+  .left-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
   }
   
   .left-nav a {
-    color: white;
+    color: #ddd;
     text-decoration: none;
-    margin-right: 20px;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease;
   }
   
-  .left-nav a:hover,
-  .active-link {
-    color: #00bcd4;
-    text-decoration: underline;
+  /* underline animation */
+  .left-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #00e5ff;
+    transition: width 0.3s ease;
   }
   
+  .left-nav a:hover::after,
+  .left-nav .active-link::after {
+    width: 100%;
+  }
+  
+  .left-nav a:hover {
+    color: #00e5ff;
+  }
+  
+  /* Right Section */
   .right-nav {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
   }
   
   .user-info {
     font-size: 1rem;
     font-weight: 500;
+    color: #aeeaff;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 12px;
+    border-radius: 6px;
+    animation: fadeIn 0.5s ease;
   }
   
+  /* Auth Button */
   .auth-btn {
-    background-color: #00bcd4;
+    background: linear-gradient(45deg, #00bcd4, #007bff);
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
+    border-radius: 25px;
+    padding: 10px 22px;
     cursor: pointer;
     font-weight: 600;
-    transition: background 0.3s;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 10px rgba(0, 188, 212, 0.3);
+    transition: all 0.3s ease;
   }
   
   .auth-btn:hover {
-    background-color: #0097a7;
+    background: linear-gradient(45deg, #00acc1, #0056b3);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
+  }
+  
+  /* Mobile Responsive Navbar */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      padding: 15px 20px;
+      gap: 10px;
+    }
+  
+    .left-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+  
+    .auth-btn {
+      padding: 8px 18px;
+    }
+  }
+  
+  /* subtle fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   

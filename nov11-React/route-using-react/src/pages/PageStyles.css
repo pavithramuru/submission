@@ -1,58 +1,222 @@
+/* Global page styling with super app background */
 .page {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
-    line-height: 1.6;
-  }
-  
-  h1 {
-    color: #007bff;
-  }
-  
-  .features {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .feature {
-    flex: 1;
-    background-color: #f7f7f7;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-width: 500px;
-  }
-  
-  .contact-form input,
-  .contact-form textarea {
-    padding: 10px;
+    align-items: center;
+    justify-content: flex-start; /* <-- change from center to flex-start */
+    min-height: 100vh;           /* <-- ensures full viewport height */
+    padding: 60px 20px 40px;     /* top padding to avoid overlap with navbar */
+    text-align: center;
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease-in-out;
+
+    /* Super App Gradient Background */
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional floating shapes for effect */
+.page::before,
+.page::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.12;
+    background: #fff;
+    animation: float 25s infinite linear;
+    z-index: 0;
+}
+
+.page::before {
+    width: 400px;
+    height: 400px;
+    top: -150px;
+    left: -100px;
+}
+
+.page::after {
+    width: 300px;
+    height: 300px;
+    bottom: -120px;
+    right: -80px;
+    animation-delay: 10s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-40px) translateX(50px) rotate(45deg); }
+    100% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+
+/* Ensure all content is above the shapes */
+.features, .team-section, .contact-form, .feature, .team-member {
+    position: relative;
+    z-index: 1;
+}
+
+/* Headings & text */
+h1 {
+    color: #fff; /* white text for gradient */
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+}
+
+p {
+    color: purple;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Feature cards */
+.features {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.feature {
+    flex: 1;
+    min-width: 260px;
+    max-width: 300px;
+    background: rgba(255, 255, 255, 0.95); /* slightly transparent */
+    padding: 25px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.feature:hover img {
+    transform: scale(1.1);
+}
+
+/* Team Section */
+.team-section {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 50px 0;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.team-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover img {
+    transform: scale(1.05);
+}
+
+/* Contact Form */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 450px;
+    width: 100%;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.95); /* slightly transparent */
+    padding: 35px 4 5px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.contact-form label {
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px 14px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .contact-form button {
+    border-radius: 8px;
+    /* width: 100%; */
+    font-size: 15px;
+    resize: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+.contact-form button {
     background-color: #007bff;
-    color: white;
-    padding: 10px;
+    color: #fff;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-  }
-  
-  .contact-form button:hover {
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form button:hover {
     background-color: #0056b3;
-  }
-  
-  .success-msg {
-    color: green;
-    font-weight: bold;
-  }
-  
+    transform: scale(1.03);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .features, .team-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* Footer styling (solid, unaffected by gradient) */
+.footer {
+    background-color: #0078d4;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+}

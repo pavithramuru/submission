@@ -23,21 +23,28 @@ const Navbar = () => {
 
   const handleAuthClick = () => {
     if (isLoggedIn) {
-      // Logout
+      // Clear user data
       localStorage.removeItem("token");
       localStorage.removeItem("username");
+      localStorage.removeItem("role");
       setIsLoggedIn(false);
       setUsername("");
-      navigate("/login");
+      // Redirect to landing page
+      navigate("/"); 
     } else {
       navigate("/login");
     }
   };
+  
 
-  //  Hide Navbar completely on login/register pages
-  if (location.pathname === "/login" || location.pathname === "/register") {
-    return null;
+  if (
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/"
+  ) {
+    return null; // No navbar on Landing, Login, Register
   }
+  
 
   return (
     <nav className="navbar">
@@ -54,7 +61,7 @@ const Navbar = () => {
       </div>
 
       <div className="right-nav">
-        {isLoggedIn && <span className="user-info">Welcome {username} 👋</span>}
+        {isLoggedIn && <span className="user-info">Welcome {username}</span>}
         <button className="auth-btn" onClick={handleAuthClick}>
           {isLoggedIn ? "Logout" : "Login"}
         </button>
