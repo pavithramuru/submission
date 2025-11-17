@@ -1,20 +1,30 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, fireEvent } from "@testing-library/react";
 import ApiButtonTimeout from "../src/components/ApiButtonTimeout";
+import { act } from "react";
 
 jest.useFakeTimers();
 global.fetch = jest.fn();
 
-test("loads mock timeout api", async () => {
+test("clicking Timeout button triggers API call after delay and updates data", async () => {
   fetch.mockResolvedValueOnce({
-    json: async () => ({ message: "Timeout Success" }),
+    json: async () => ({ message: "Timeout Success" })
   });
 
   render(<ApiButtonTimeout />);
 
-  userEvent.click(screen.getByText("Load (Timeout)"));
+  fireEvent.click(screen.getByText("Load (Timeout)"));
 
-  jest.advanceTimersByTime(500);
+  // Run the artificial timeout
+  act(() => {
+    jest.advanceTimersByTime(500);
+  });
 
-  expect(await screen.findByText("Timeout Success")).toBeInTheDocument();
+  // Flush Promise microtasks
+  await act(async () => {});
+
+  expect(fetch).toHaveBeenCalledTimes(1);
+  expect(fetch).toHaveBeenCalledWith("/timeout-api");
+
+  const status = await screen.findByText("Timeout Success");
+  expect(status).toBeInTheDocument();
 });

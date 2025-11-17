@@ -4,14 +4,22 @@ import ApiButtonPromise from "../src/components/ApiButtonPromise";
 
 global.fetch = jest.fn();
 
-test("loads mock promise api", async () => {
+test("clicking Promise button triggers API call and updates data", async () => {
   fetch.mockResolvedValueOnce({
     json: async () => ({ message: "Promise Success" }),
   });
 
   render(<ApiButtonPromise />);
 
-  await userEvent.click(screen.getByText("Load (Promise)"));
+  const button = screen.getByText("Load (Promise)");
 
-  expect(await screen.findByText("Promise Success")).toBeInTheDocument();
+  expect(button).toBeInTheDocument();
+
+  await userEvent.click(button);
+
+  expect(fetch).toHaveBeenCalledTimes(1);
+  expect(fetch).toHaveBeenCalledWith("/promise-api");
+
+  const status = await screen.findByText("Promise Success");
+  expect(status).toBeInTheDocument();
 });

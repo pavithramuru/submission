@@ -1,22 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import ApiButtonPromise from './components/ApiButtonPromise';
+import ApiButtonAsync from './components/ApiButtonAsync';
+import ApiButtonTimeout from './components/ApiButtonTimeout';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>API Button Demo</h1>
+
+        <div style={{ margin: '10px 0' }}>
+          <ApiButtonPromise />
+        </div>
+
+        <div style={{ margin: '10px 0' }}>
+          <ApiButtonAsync />
+        </div>
+
+        <div style={{ margin: '10px 0' }}>
+          <ApiButtonTimeout />
+        </div>
       </header>
     </div>
   );
